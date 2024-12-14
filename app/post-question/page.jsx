@@ -2,51 +2,44 @@
 
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react"; // Importing next-auth for session management
-import Form from "/components/Form"; 
+import Form from "/components/Form"; // Update import path if needed
+
 const Qpage = () => {
-  const { data: session, status } = useSession(); // Using the useSession hook to get session data
+  const { data: session, status } = useSession(); // Destructure `data` and `status` from `useSession`
   const [submitting, setIsSubmitting] = useState(false);
-  const [question, setQuestion] = useState(""); // The state for the question input field
+  const [question, setQuestion] = useState(""); // State for the question input field
   const [loadingState, setLoadingState] = useState({ loading: false, error: null });
   const [data, setData] = useState(null);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!question || question.trim().length < 10) {
       setLoadingState({ loading: false, error: "Question must be at least 10 characters long." });
       return;
     }
-  
+
     setIsSubmitting(true);
     setLoadingState({ loading: true, error: null });
-  
+
     try {
-
-      console.log(question)
-      console.log(session?.user.id)
-      console.log(JSON.stringify({ question:question, userId: session?.user.id }));
-      console.log()
-
       const response = await fetch("/api/questions/new/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        
-        body: JSON.stringify({ question:question, userId: session?.user.id }), // Send question and user ID to the backend
-        credentials: "include", // Ensure session cookies are sent with the request
+        body: JSON.stringify({ question, userId: session?.user?.id }), // Use session data safely
       });
- 
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Failed to submit question");
       }
-  
+
       const result = await response.json();
       console.log("Question submitted successfully:", result);
+
       setData(result); // Store the newly submitted question in the state
       setQuestion(""); // Reset the question field
     } catch (error) {
@@ -54,11 +47,11 @@ const Qpage = () => {
       setLoadingState({ loading: false, error: error.message });
     } finally {
       setIsSubmitting(false);
-      setLoadingState({ loading: false, error: null });
+      setLoadingState((prev) => ({ ...prev, loading: false })); // Preserve error state
     }
   };
-  
 
+  // Handle session loading or unauthenticated state
   if (status === "loading") {
     return <p>Loading...</p>;
   }
@@ -96,7 +89,6 @@ const Qpage = () => {
           <p className="mt-2">{data?.question}</p>
         </div>
       )}
-      
     </div>
   );
 };

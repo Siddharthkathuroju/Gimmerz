@@ -10,7 +10,6 @@ const Nav = () => {
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-
   useEffect(() => {
     (async () => {
       const res = await getProviders();
@@ -95,7 +94,7 @@ const Nav = () => {
             {toggleDropdown && (
               <div className="absolute top-12 right-0 w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-4">
                 <Link
-                  href="/profile"
+                  href="app\profile\page.jsx"
                   className="block text-gray-700 hover:text-blue-600 py-2"
                   onClick={() => setToggleDropdown(false)}
                   
@@ -107,7 +106,7 @@ const Nav = () => {
                   className="block text-gray-700 hover:text-blue-600 py-2"
                   onClick={() => setToggleDropdown(false)}
                 >
-                  Create Prompt
+                  Post Thoughts
                 </Link>
                 <button
                   type="button"
