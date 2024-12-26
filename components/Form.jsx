@@ -22,7 +22,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           disabled={submitting}
           className="px-6 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50"
         >
-          {submitting ? "Submitting..." : type}
+          {submitting ? "Generating..." : type}
         </button>
       </div>
     </form>

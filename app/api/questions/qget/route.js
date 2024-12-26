@@ -2,12 +2,17 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "/utils/authOptions";
 import { connectoDB } from "/utils/database";
 import Question from "/models/questions";
+import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req) => {
   try {
-    // Validate the session
-    const session = await getServerSession({ req });
-    console.log("from_session" + session._id)
+    await connectoDB();
+    console.log("api backened!")
+
+    const session = await getServerSession({req});
+    
+    console.log({session});
+    console.log("from_session" + session.user.id);
     if (!session || !session.user) {
       return new Response(
         JSON.stringify({ message: "User not authenticated" }),
@@ -15,14 +20,9 @@ export const GET = async (req) => {
       );
     }
 
-    // Connect to the database
-    await connectoDB();
-    console.log("Connected to api backened!!!")
-
-    // Fetch only the questions belonging to the logged-in user
-    const userId = session?.user?._id;
-    console.log(userId);
-    const questions = await Question.find({ user: userId });
+    const questions = await Question.find({ user: session.user.id}).sort({
+      createdAt: -1,
+    });
 
     return new Response(
       JSON.stringify(questions),
