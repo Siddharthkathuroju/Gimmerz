@@ -77,7 +77,7 @@ const Qpage = () => {
 
       {/* Render the Form component if the user is signed in */}
       <Form
-        type="Ask"
+        type="Generate"
         post={question}
         setPost={setQuestion}
         submitting={submitting}

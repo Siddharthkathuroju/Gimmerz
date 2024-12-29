@@ -21,9 +21,17 @@ const Todo = () => {
   // Function to add a new task
   const addTask = () => {
     if (task.trim() !== "") {
-      setTasks([...tasks, task]);
+      setTasks([...tasks, { text: task, completed: false }]); // Add new task with `completed` false
       setTask(""); // Clear the input after adding the task
     }
+  };
+
+  // Function to toggle task completion
+  const toggleCompletion = (index) => {
+    const updatedTasks = tasks.map((task, i) =>
+      i === index ? { ...task, completed: !task.completed } : task
+    );
+    setTasks(updatedTasks);
   };
 
   // Function to delete a task
@@ -60,11 +68,28 @@ const Todo = () => {
           tasks.map((task, index) => (
             <li
               key={index}
-              className="flex items-center justify-between px-4 py-3 bg-white rounded-lg shadow mb-2"
+              className={`flex items-center justify-between px-4 py-3 bg-white rounded-lg shadow mb-2 cursor-pointer transition ${
+                task.completed ? "bg-gray-300" : ""
+              }`}
+              onClick={() => toggleCompletion(index)} // Toggle completion on click
             >
-              <span className="text-gray-800">{task}</span>
+              {/* Tick symbol */}
+              {task.completed && (
+                <span className="text-white text-xl mr-3">&#10003;</span>
+              )}
+
+              <span
+                className={`text-gray-800 ${task.completed ? "line-through text-black" : ""}`}
+              >
+                {task.text}
+              </span>
+
+              {/* Delete button */}
               <button
-                onClick={() => deleteTask(index)}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering toggleCompletion
+                  deleteTask(index);
+                }}
                 className="text-gray-400 hover:text-gray-600 transition"
                 aria-label="Delete Task"
               >

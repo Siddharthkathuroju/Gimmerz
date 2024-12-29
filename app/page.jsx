@@ -1,8 +1,6 @@
 import React from 'react'
 import Form from '../components/Form'
 import Qpage from './post-question/page'
-import User from '/models/users'
-import Sidebar from '/components/sidebar'
 const Homepage = () => {
   return (
     <><section className="w-full flex flex-col items-center justify-center py-10 bg-gradient-to-br from-blue-50 via-purple-100 to-indigo-50">
