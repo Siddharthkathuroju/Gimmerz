@@ -11,7 +11,7 @@ export const POST = async (req, res) => {
     const session = await getServerSession({req});
     const { question, userId } = await req.json();
 
-    console.log("from_session"+session?.user?.id);
+    console.log("from_session "+ session?._id);
 
     if (!question || question.trim().length < 10) {
       return new Response(

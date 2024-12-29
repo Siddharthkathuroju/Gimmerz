@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";  // Import getServerSession to fet
 import { authOptions } from "/utils/authOptions";  // Your auth options file
 import Nav from "/components/Nav";
 import Provider from "/components/Provider";
-
+import Sidebar from "/components/sidebar";
 export const metadata = {
   title: "Gimmer",
   description: "Discover & Share AI",
@@ -22,6 +22,7 @@ const RootLayout = async ({ children }) => {
             <div className="gradient" />
           </div>
           <main className="app">
+            <Sidebar />
             <Nav />
             {children}
           </main>
