@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { signIn, signOut, getProviders, useSession } from "next-auth/react";
+import Sidebar from "./sidebar";
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -18,6 +19,7 @@ const Nav = () => {
 
   return (
     <div className="flex min-h-screen">
+      <Sidebar />
       {/* Main Content */}
       <div className="flex-1 ml-60">
         <nav className="flex items-center justify-between w-full bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 shadow-md py-4 px-6">
@@ -33,7 +35,7 @@ const Nav = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden sm:flex items-center gap-6">
+          <div className="hidden sm:flex items-center gap-12">
             {session?.user ? (
               <div className="flex items-center gap-4">
                 <Link

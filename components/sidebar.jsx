@@ -22,7 +22,7 @@ const Sidebar = () => {
     { icon: FiUsers, name: "Profile", link: "/profile" },
     { icon: FiMail, name: "Messages", link: "/messages" },
     { icon: FiSettings, name: "Settings", link: "/settings" },
-    { icon: FiHelpCircle, name: "Help Center", link: "/help-center" },
+    { icon: FiHelpCircle, name: "Help Center", link: "/Helpcenter" },
   ];
 
   return (
