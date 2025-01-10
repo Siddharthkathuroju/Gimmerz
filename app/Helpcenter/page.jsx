@@ -3,12 +3,39 @@
 import React, { useState } from "react";
 
 export default function HelpCenter() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [email, setEmail] = useState("");
+  const [issue, setIssue] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleSearch = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Search for:", searchQuery);
-    // Implement search functionality if needed
+
+    try {
+      const response = await fetch("/api/help-center/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, issue }),
+      });
+
+      if (response.ok) {
+        setSuccessMessage(
+          "Thank you for your submission. We'll look into your issue and respond shortly."
+        );
+        setEmail("");
+        setIssue("");
+      } else {
+        setSuccessMessage(
+          "There was an issue submitting your request. Please try again."
+        );
+      }
+    } catch (error) {
+      console.error("Error submitting issue:", error);
+      setSuccessMessage(
+        "There was an error. Please check your internet connection and try again."
+      );
+    }
   };
 
   return (
@@ -17,21 +44,16 @@ export default function HelpCenter() {
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-900">Help Center</h1>
         <p className="text-lg text-gray-600 mt-2">
-          How can we assist you today? Browse topics or search for help.
+          How can we assist you today? Browse topics, search for help, or post your issue below.
         </p>
       </div>
 
       {/* Search Bar */}
       <div className="flex justify-center mb-8">
-        <form
-          onSubmit={handleSearch}
-          className="flex items-center w-full max-w-lg"
-        >
+        <form className="flex items-center w-full max-w-lg">
           <input
             type="text"
             placeholder="Search for help..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
@@ -41,6 +63,44 @@ export default function HelpCenter() {
             Search
           </button>
         </form>
+      </div>
+
+      {/* Post Issue Section */}
+      <div className="post-issue-section mb-8">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          Post Your Issue or Question
+        </h2>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center w-full max-w-lg space-y-4"
+        >
+          <textarea
+            placeholder="Describe your issue..."
+            value={issue}
+            onChange={(e) => setIssue(e.target.value)}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="email"
+            placeholder="Your email address..."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          >
+            Submit
+          </button>
+        </form>
+        {successMessage && (
+          <div className="text-center text-green-600 font-medium mt-4">
+            {successMessage}
+          </div>
+        )}
       </div>
 
       {/* FAQ Section */}
