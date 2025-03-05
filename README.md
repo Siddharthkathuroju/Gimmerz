@@ -6,7 +6,11 @@ Frontend: React
 Backend: Next.js, MongoDB (for authentication and data storage)
 Authentication: MongoDB for secure user login and query management
 API Integration: Custom API to handle query submission and responses
-Installation
+
+Docker Setup (Private Container)
+
+Gimmerz is containerized using Docker for seamless deployment. The Docker image is private and not publicly accessible.
+Installation:
 Clone the repository:
 
 bash
