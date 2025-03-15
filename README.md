@@ -1,6 +1,6 @@
 Gimmerz: Student Query Management and Profile Tracker
 
-Gimmerz is a web-based platform designed to help students manage their queries, track their academic profiles, and maintain a personal to-do list. The application enables students to submit queries, receive responses, and monitor their progress through a personalized dashboard.
+Gimmerz is a web-based platform designed to help students manage their queries, track their academic profiles, and maintain a personal to-do list. The application enables students to submit queries, receive responses, and monitor their progress through personalized dashboard.
 Tech Stack
 Frontend: React
 Backend: Next.js, MongoDB (authentication and data storage)
