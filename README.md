@@ -49,7 +49,7 @@ View Profile:
 View and edit your personal profile, including academic history and progress.
 Manage To-Do List:
 
-Add tasks to your to-do list.
+Add tasks to to-do list.
 Mark them as completed or delete tasks when done.
 Track Resume History:
 
