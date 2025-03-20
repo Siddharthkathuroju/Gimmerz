@@ -5,7 +5,8 @@ Tech Stack
 Frontend: React
 Backend: Next.js, MongoDB (authentication and data storage)
 Authentication: MongoDB for secure user login and query management
-API Integration: Custom API to handle query submission and responses
+API Integration: Custom API to handle query submission and responses.
+
 
 Docker Setup (Private Container)
 
