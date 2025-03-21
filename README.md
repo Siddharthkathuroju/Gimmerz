@@ -50,12 +50,12 @@ View Profile:
 View and edit your personal profile, including academic history and progress.
 Manage To-Do List:
 
-Add tasks to to-do list.
+Add tasks to to-do list
 Mark them as completed or delete tasks when done.
 Track Resume History:
 
 View your history of academic milestones, assignments, and progress.
-Contributing
+Contributing,
 If you'd like to contribute to Gimmerz:
 
 Fork the repository.
