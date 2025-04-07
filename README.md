@@ -31,7 +31,7 @@ MONGO_URI=your_mongodb_connection_string
 Run the development server:
 
 bash
-Copy code
+Copy code:
 npm run dev
 Open your browser and visit http://localhost:3000.
 
