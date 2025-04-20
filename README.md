@@ -8,7 +8,7 @@ Authentication: MongoDB for secure user login and query management
 API Integration: Custom API to handle query submission and responses.
 
 
-Docker Setup (Private Container)
+Docker Setup (Private Container):
 
 Gimmerz is containerized using Docker for seamless deployment. The Docker image is private and not publicly accessible.
 Installation:
